@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/use-auth";
+import { useMobileOptimized } from "@/hooks/use-mobile";
 import NotFound from "@/pages/not-found";
 import Welcome from "@/pages/welcome";
 import SignUp from "@/pages/signup";
@@ -36,6 +37,9 @@ function Router() {
 }
 
 function App() {
+  // Initialize mobile optimizations
+  useMobileOptimized();
+
   // Initialize theme on app load
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
