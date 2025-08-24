@@ -5,18 +5,30 @@ const config: CapacitorConfig = {
   appName: 'SafeRide',
   webDir: 'dist/public',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'https',
+    hostname: 'app.saferide.local',
+    iosScheme: 'saferide'
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 3000,
       launchAutoHide: true,
-      backgroundColor: "#1e90ff",
+      backgroundColor: "#007AFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true
+    },
+    Geolocation: {
+      permissions: ['ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION']
+    },
+    StatusBar: {
+      style: 'LIGHT',
+      backgroundColor: '#007AFF'
+    },
+    Toast: {
+      duration: 'short'
     }
   }
 };
