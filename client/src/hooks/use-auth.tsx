@@ -18,30 +18,52 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Set up Firebase auth state listener
-    const unsubscribe = onAuthChange(async (firebaseUser) => {
-      setIsLoading(true);
-      
-      if (firebaseUser) {
-        // Get user data from Firestore
-        const userData = await getUserDocument(firebaseUser.uid);
-        if (userData) {
-          const userWithId = { id: firebaseUser.uid, ...userData } as User;
-          setUser(userWithId);
-          setToken(await firebaseUser.getIdToken());
-          localStorage.setItem('saferide-user', JSON.stringify(userWithId));
-        }
-      } else {
-        // User is signed out
-        setUser(null);
-        setToken(null);
+    setIsLoading(true);
+    
+    // Check for stored JWT token and user data from backend authentication
+    const storedToken = localStorage.getItem('saferide-token');
+    const storedUser = localStorage.getItem('saferide-user');
+    
+    if (storedToken && storedUser) {
+      try {
+        const userData = JSON.parse(storedUser);
+        setUser(userData);
+        setToken(storedToken);
+      } catch (error) {
+        console.error('Error parsing stored user data:', error);
+        localStorage.removeItem('saferide-token');
         localStorage.removeItem('saferide-user');
       }
+    }
+    
+    // Try to set up Firebase auth state listener if available
+    try {
+      const unsubscribe = onAuthChange(async (firebaseUser) => {
+        if (firebaseUser) {
+          // Get user data from Firestore
+          const userData = await getUserDocument(firebaseUser.uid);
+          if (userData) {
+            const userWithId = { id: firebaseUser.uid, ...userData } as User;
+            setUser(userWithId);
+            setToken(await firebaseUser.getIdToken());
+            localStorage.setItem('saferide-user', JSON.stringify(userWithId));
+          }
+        } else if (!storedToken) {
+          // Only clear if we don't have backend auth
+          setUser(null);
+          setToken(null);
+          localStorage.removeItem('saferide-user');
+        }
+      });
       
       setIsLoading(false);
-    });
-
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch (error) {
+      // Firebase not available, rely on backend authentication
+      console.warn('Firebase auth not available, using backend authentication');
+      setIsLoading(false);
+      return () => {};
+    }
   }, []);
 
   const login = (userData: User, authToken: string) => {
@@ -53,10 +75,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
+      // Try Firebase logout if available
       await logOut();
       // Firebase auth state listener will handle the cleanup
     } catch (error) {
-      console.error('Logout error:', error);
+      // Firebase not available, handle logout manually
+      console.warn('Firebase logout not available, using manual logout');
+      setUser(null);
+      setToken(null);
+      localStorage.removeItem('saferide-token');
+      localStorage.removeItem('saferide-user');
     }
   };
 
