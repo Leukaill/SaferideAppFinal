@@ -1,0 +1,25 @@
+{
+  "name": "SafeRide - Student Transport Safety",
+  "short_name": "SafeRide",
+  "description": "Keep your students safe during transport with real-time tracking and alerts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#007AFF",
+  "orientation": "portrait",
+  "categories": ["education", "safety", "transportation"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMwMDdBRkYiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CjxwYXRoIGQ9Ik0yMCAxM2MwIDUtLTMuNSA3LjUtNy42NiA4Ljk1YTEgMSAwIDAgMS0uNjcgMGMtMS4wNy0uMjctMi4xOC0uNjktMy4zMy0xLjI1bS0zLjQ0LTIuMDVhMTMuNSAxMy41IDAgMCAxLTEuNDMtMi4zMCIvPgo8cGF0aCBkPSJNMTIgMXYyIi8+CjxwYXRoIGQ9Ik0xIDEyaDIiLz4KPHN1YiB4PSIxOSIgeT0iMTIiPjI8L3N1Yj4KPHN1YiB4PSIxMiIgeT0iMTkiPjI8L3N1Yj4KPHN1YiB4PSI1LjEiIHk9IjUuMSI+MjwvU3ViPgo8c3ViIHg9IjE4LjkiIHk9IjUuMSI+Mjwvc3ViPgo8c3ViIHg9IjUuMSIgeT0iMTguOSI+Mjwvc3ViPgo8cGF0aCBkPSJNOS01YTcgNyAwIDEgMSAxMCAweiIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTA0IiBmaWxsPSIjMDA3QUZGIi8+CjxzdmcgeD0iMTI4IiB5PSIxMjgiIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KPHN1YiB4PSIxMiIgeT0iMSI+MTI8L3N1Yj4KPHN1YiB4PSIzIiB5PSI3Ij4xMjwvc3ViPgo8c3ViIHg9IjE5IiB5PSI1Ij4xMjwvc3ViPgo8c3ViIHg9IjE5IiB5PSIxNyI+MTI8L3N1Yj4KPHN1YiB4PSIzIiB5PSIxNyI+MTI8L3N1Yj4KPHN1YiB4PSIxMiIgeT0iMjMiPjEyPC9zdWI+CjxwYXRoIGQ9Ik05LTVhNyA3IDAgMSAxIDEwIDB6Ii8+CjxwYXRoIGQ9Ik05LjA5IDlhMyAzIDAgMCAxIDUuODMgMWMwIDItMyAzLTMgMyIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

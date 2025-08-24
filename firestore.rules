@@ -1,0 +1,56 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read and write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Students - parents can access their own students, admins can access all
+    match /students/{studentId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.parentId ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager']
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Routes - drivers can access their routes, admins can access all
+    match /routes/{routeId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.driverId ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager']
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Trips - accessible by related users (drivers, parents of students)
+    match /trips/{tripId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.driverId ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager', 'parent']
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Alerts - accessible by recipient and admins
+    match /alerts/{alertId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.recipientId ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager']
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Messages - accessible by sender and recipient
+    match /messages/{messageId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.senderId ||
+        request.auth.uid == resource.data.recipientId ||
+        request.auth.uid in resource.data.participants
+      );
+      allow create: if request.auth != null;
+    }
+  }
+}
