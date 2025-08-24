@@ -66,40 +66,6 @@ export default function Welcome() {
           </Button>
         </div>
 
-        {/* Features Grid */}
-        <div className="w-full max-w-6xl mb-12 px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-ios-blue" />
-              </div>
-              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Real-Time Tracking</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Track your child's bus in real-time with GPS precision and live updates
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Bell className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Instant Alerts</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Get notified about pickups, drop-offs, delays, and any safety concerns
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl sm:col-span-2 lg:col-span-1">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <MessageSquare className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Direct Communication</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Message directly with drivers and school administrators
-              </p>
-            </Card>
-          </div>
-        </div>
 
         {/* Stats Section */}
         <div className="w-full max-w-2xl mb-12">
