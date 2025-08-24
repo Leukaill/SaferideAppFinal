@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@shared/schema';
+import { onAuthChange, logOut, getUserDocument } from '@/lib/firebase';
 
 interface AuthContextType {
   user: User | null;
@@ -17,23 +18,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing token and user data on app load
-    const savedToken = localStorage.getItem('saferide-token');
-    const savedUser = localStorage.getItem('saferide-user');
-    
-    if (savedToken && savedUser) {
-      try {
-        const userData = JSON.parse(savedUser);
-        setUser(userData);
-        setToken(savedToken);
-      } catch (error) {
-        console.error('Error parsing saved user data:', error);
-        localStorage.removeItem('saferide-token');
+    // Set up Firebase auth state listener
+    const unsubscribe = onAuthChange(async (firebaseUser) => {
+      setIsLoading(true);
+      
+      if (firebaseUser) {
+        // Get user data from Firestore
+        const userData = await getUserDocument(firebaseUser.uid);
+        if (userData) {
+          const userWithId = { id: firebaseUser.uid, ...userData } as User;
+          setUser(userWithId);
+          setToken(await firebaseUser.getIdToken());
+          localStorage.setItem('saferide-user', JSON.stringify(userWithId));
+        }
+      } else {
+        // User is signed out
+        setUser(null);
+        setToken(null);
         localStorage.removeItem('saferide-user');
       }
-    }
-    
-    setIsLoading(false);
+      
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const login = (userData: User, authToken: string) => {
@@ -43,11 +51,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('saferide-user', JSON.stringify(userData));
   };
 
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem('saferide-token');
-    localStorage.removeItem('saferide-user');
+  const logout = async () => {
+    try {
+      await logOut();
+      // Firebase auth state listener will handle the cleanup
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (

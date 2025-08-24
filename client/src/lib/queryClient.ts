@@ -12,7 +12,19 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const token = localStorage.getItem('saferide-token');
+  // Get Firebase token from auth context
+  const user = JSON.parse(localStorage.getItem('saferide-user') || 'null');
+  let token = null;
+  
+  if (user) {
+    // Get fresh Firebase token
+    const { getAuth } = await import('firebase/auth');
+    const auth = getAuth();
+    if (auth.currentUser) {
+      token = await auth.currentUser.getIdToken();
+    }
+  }
+  
   const headers: Record<string, string> = {
     ...(data ? { "Content-Type": "application/json" } : {}),
     ...(token ? { "Authorization": `Bearer ${token}` } : {}),
@@ -34,7 +46,19 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const token = localStorage.getItem('saferide-token');
+    // Get Firebase token from auth context
+    const user = JSON.parse(localStorage.getItem('saferide-user') || 'null');
+    let token = null;
+    
+    if (user) {
+      // Get fresh Firebase token
+      const { getAuth } = await import('firebase/auth');
+      const auth = getAuth();
+      if (auth.currentUser) {
+        token = await auth.currentUser.getIdToken();
+      }
+    }
+    
     const headers: Record<string, string> = {
       ...(token ? { "Authorization": `Bearer ${token}` } : {}),
     };

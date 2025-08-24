@@ -10,8 +10,8 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "saferide-secret-key";
 
-// Middleware to verify JWT token
-function authenticateToken(req: any, res: any, next: any) {
+// Middleware to verify Firebase token
+async function authenticateToken(req: any, res: any, next: any) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -19,11 +19,32 @@ function authenticateToken(req: any, res: any, next: any) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
+  try {
+    // Try Firebase token verification
+    const admin = await import('firebase-admin');
+    
+    // Initialize Firebase Admin if not already done
+    if (!admin.apps.length) {
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        }),
+      });
+    }
+
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    req.user = { userId: decodedToken.uid, ...decodedToken };
     next();
-  });
+  } catch (firebaseError) {
+    // Fallback to JWT verification for backend-created tokens
+    jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
+      if (err) return res.sendStatus(403);
+      req.user = user;
+      next();
+    });
+  }
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {

@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
-import { apiRequest } from "@/lib/queryClient";
+import { signUp, createUserDocument } from "@/lib/firebase";
 import { insertUserSchema } from "@shared/schema";
 
 const signUpSchema = insertUserSchema.extend({
@@ -53,24 +53,27 @@ export default function SignUp() {
 
   const signUpMutation = useMutation({
     mutationFn: async (data: SignUpFormData) => {
-      const { confirmPassword, agreeToTerms, ...userData } = data;
+      const { confirmPassword, agreeToTerms, password, ...userData } = data;
       
-      const response = await apiRequest('POST', '/api/auth/signup', {
+      // Create Firebase user
+      const userCredential = await signUp(data.email, password);
+      
+      // Create user document in Firestore
+      await createUserDocument(userCredential.user.uid, {
         ...userData,
+        email: data.email,
         role: selectedRole,
       });
-      return await response.json();
+      
+      return { user: { id: userCredential.user.uid, ...userData, role: selectedRole }, firebaseUser: userCredential.user };
     },
     onSuccess: (data) => {
-      // Login with backend token
-      login(data.user, data.token);
-      
       toast({
         title: "Account created successfully!",
         description: "Welcome to SafeRide",
       });
       
-      // Redirect based on role
+      // Redirect based on role - Firebase auth listener will handle the login state
       switch (data.user.role) {
         case 'parent':
           setLocation('/parent-dashboard');
