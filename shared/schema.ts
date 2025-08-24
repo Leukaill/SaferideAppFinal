@@ -72,14 +72,14 @@ export const alerts = pgTable("alerts", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const messages = pgTable("messages", {
+export const messages: any = pgTable("messages", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   senderId: varchar("sender_id").references(() => users.id).notNull(),
   recipientId: varchar("recipient_id").references(() => users.id).notNull(),
   subject: text("subject").notNull(),
   content: text("content").notNull(),
   isRead: boolean("is_read").default(false),
-  parentMessageId: varchar("parent_message_id").references(() => messages.id),
+  parentMessageId: varchar("parent_message_id").references((): any => messages.id),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
