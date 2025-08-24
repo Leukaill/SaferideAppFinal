@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "808297715882",
+    "project_id": "memechat2-52017",
+    "storage_bucket": "memechat2-52017.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808297715882:android:b2436bedb05601909f98d3",
+        "android_client_info": {
+          "package_name": "com.saferide.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808297715882-abc123def456ghi789jkl012mno345pq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saferide.app",
+            "certificate_hash": "SHA1_PLACEHOLDER"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCic2FiNwDuSdnYgEpV32YQ3iM52bZd9-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808297715882-abc123def456ghi789jkl012mno345pq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
