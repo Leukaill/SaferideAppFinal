@@ -77,7 +77,7 @@ export class MemStorage implements IStorage {
     
     // Initialize with demo data
     this.initializeDemoData();
-    this.createDemoAdmin();
+    // Demo admin will be initialized separately
   }
 
   private initializeDemoData() {
@@ -113,12 +113,13 @@ export class MemStorage implements IStorage {
     this.trips.set(demoTrip.id, demoTrip);
   }
 
-  private createDemoAdmin() {
-    // Create a demo admin for messaging
+  async initializeDemoAdmin() {
+    const bcrypt = await import('bcrypt');
+    // Create a demo admin for messaging with properly hashed password
     const demoAdmin: User = {
       id: 'admin-demo-1',
       email: 'admin@saferide.school',
-      password: 'hashedpassword', // In real app, this would be properly hashed
+      password: await bcrypt.hash('admin123', 10), // Password: admin123
       name: 'Sarah Johnson',
       phone: '+1-555-0123',
       role: 'admin',

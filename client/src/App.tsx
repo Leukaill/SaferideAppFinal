@@ -46,6 +46,14 @@ function App() {
     if (savedTheme === 'dark') {
       document.documentElement.classList.add('dark');
     }
+    
+    // Clear any old Firebase tokens to prevent conflicts
+    const shouldClearOldAuth = localStorage.getItem('saferide-auth-migrated');
+    if (!shouldClearOldAuth) {
+      localStorage.removeItem('firebase-user');
+      localStorage.removeItem('firebase-token');
+      localStorage.setItem('saferide-auth-migrated', 'true');
+    }
   }, []);
 
   return (

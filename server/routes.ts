@@ -1,6 +1,9 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+
+// Initialize demo admin with proper password
+storage.initializeDemoAdmin().catch(console.error);
 import { insertUserSchema, insertStudentSchema, insertRouteSchema, insertTripSchema, insertAttendanceSchema, insertAlertSchema, insertMessageSchema } from "@shared/schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

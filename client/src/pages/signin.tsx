@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
-import { signIn, getUserDocument } from "@/lib/firebase";
+import { apiRequest } from "@/lib/queryClient";
 
 const signInSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -37,17 +37,22 @@ export default function SignIn() {
 
   const signInMutation = useMutation({
     mutationFn: async (data: SignInFormData) => {
-      const userCredential = await signIn(data.email, data.password);
-      const userData = await getUserDocument(userCredential.user.uid);
-      return { user: { id: userCredential.user.uid, ...userData } as any, firebaseUser: userCredential.user };
+      const response = await apiRequest('POST', '/api/auth/signin', {
+        email: data.email,
+        password: data.password
+      });
+      return await response.json();
     },
     onSuccess: (data) => {
+      // Login with backend token
+      login(data.user, data.token);
+      
       toast({
         title: "Welcome back!",
         description: "You have been signed in successfully",
       });
       
-      // Redirect based on role - Firebase auth listener will handle the login state
+      // Redirect based on role
       const userRole = data.user?.role;
       switch (userRole) {
         case 'parent':
