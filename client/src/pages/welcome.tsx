@@ -67,42 +67,38 @@ export default function Welcome() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mb-12 px-4">
-          <Card className="p-8 text-center border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 rounded-3xl min-h-[280px] flex flex-col justify-between">
-            <div>
-              <div className="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <MapPin className="w-10 h-10 text-ios-blue" />
+        <div className="w-full max-w-6xl mb-12 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-8 h-8 text-ios-blue" />
               </div>
-              <h3 className="font-bold text-xl mb-4 text-gray-800 leading-tight">Real-Time Tracking</h3>
-            </div>
-            <p className="text-gray-600 text-base leading-relaxed">
-              Track your child's bus in real-time with GPS precision and live updates
-            </p>
-          </Card>
+              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Real-Time Tracking</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Track your child's bus in real-time with GPS precision and live updates
+              </p>
+            </Card>
 
-          <Card className="p-8 text-center border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 rounded-3xl min-h-[280px] flex flex-col justify-between">
-            <div>
-              <div className="w-20 h-20 bg-green-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Bell className="w-10 h-10 text-green-600" />
+            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Bell className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="font-bold text-xl mb-4 text-gray-800 leading-tight">Instant Alerts</h3>
-            </div>
-            <p className="text-gray-600 text-base leading-relaxed">
-              Get notified about pickups, drop-offs, delays, and any safety concerns
-            </p>
-          </Card>
+              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Instant Alerts</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Get notified about pickups, drop-offs, delays, and any safety concerns
+              </p>
+            </Card>
 
-          <Card className="p-8 text-center border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 rounded-3xl min-h-[280px] flex flex-col justify-between">
-            <div>
-              <div className="w-20 h-20 bg-purple-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <MessageSquare className="w-10 h-10 text-purple-600" />
+            <Card className="p-6 text-center border border-gray-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 rounded-2xl sm:col-span-2 lg:col-span-1">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <MessageSquare className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="font-bold text-xl mb-4 text-gray-800 leading-tight">Direct Communication</h3>
-            </div>
-            <p className="text-gray-600 text-base leading-relaxed">
-              Message directly with drivers and school administrators
-            </p>
-          </Card>
+              <h3 className="font-semibold text-lg mb-3 text-gray-900 whitespace-nowrap">Direct Communication</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Message directly with drivers and school administrators
+              </p>
+            </Card>
+          </div>
         </div>
 
         {/* Stats Section */}
