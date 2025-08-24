@@ -4,13 +4,13 @@ import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, a
 import { getDatabase, ref, set, onValue, push, serverTimestamp } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyCic2FiNwDuSdnYgEpV32YQ3iM52bZd9-U",
+  authDomain: "memechat2-52017.firebaseapp.com",
+  databaseURL: "https://memechat2-52017-default-rtdb.firebaseio.com",
+  projectId: "memechat2-52017",
+  storageBucket: "memechat2-52017.firebasestorage.app",
+  messagingSenderId: "808297715882",
+  appId: "1:808297715882:web:b2436bedb05601909f98d3"
 };
 
 const app = initializeApp(firebaseConfig);

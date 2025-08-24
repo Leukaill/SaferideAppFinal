@@ -1,4 +1,4 @@
-import { Shield } from "lucide-react";
+import logoImage from "../assets/logo.png";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
@@ -12,12 +12,6 @@ export function Logo({ size = "md", showText = true }: LogoProps) {
     lg: "w-20 h-20"
   };
 
-  const iconSizes = {
-    sm: "text-lg",
-    md: "text-2xl",
-    lg: "text-3xl"
-  };
-
   const textSizes = {
     sm: "text-lg",
     md: "text-2xl",
@@ -26,8 +20,8 @@ export function Logo({ size = "md", showText = true }: LogoProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className={`${sizeClasses[size]} bg-ios-blue rounded-2xl flex items-center justify-center shadow-ios-lg`} data-testid="logo-icon">
-        <Shield className={`text-white ${iconSizes[size]}`} />
+      <div className={`${sizeClasses[size]} flex items-center justify-center`} data-testid="logo-icon">
+        <img src={logoImage} alt="SafeRide Logo" className="w-full h-full object-contain" />
       </div>
       {showText && (
         <div className="mt-4 text-center">
