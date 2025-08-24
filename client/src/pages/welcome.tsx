@@ -1,8 +1,10 @@
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
+import { Shield, MapPin, Users, Clock, Bell, MessageSquare, Bus, Star } from "lucide-react";
 
 export default function Welcome() {
   const [, setLocation] = useLocation();
@@ -31,28 +33,118 @@ export default function Welcome() {
   }, [user, setLocation]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-ios-bg" data-testid="welcome-screen">
-      <div className="mb-8">
-        <Logo size="lg" />
-      </div>
-      
-      <div className="w-full space-y-4">
-        <Button 
-          onClick={() => setLocation('/signup')}
-          className="w-full bg-ios-blue hover:bg-ios-blue/90 text-white py-4 rounded-xl text-lg font-semibold shadow-ios card-hover"
-          data-testid="button-get-started"
-        >
-          Get Started
-        </Button>
+    <div className="min-h-screen bg-gradient-to-br from-ios-blue/5 via-white to-green-50" data-testid="welcome-screen">
+      {/* Hero Section */}
+      <div className="flex flex-col items-center justify-center min-h-screen p-6 max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <Logo size="lg" />
+          <p className="text-lg text-gray-600 mt-4 max-w-md mx-auto">
+            Keeping students safe with real-time tracking, instant alerts, and seamless communication
+          </p>
+        </div>
         
-        <Button 
-          onClick={() => setLocation('/signin')}
-          variant="outline"
-          className="w-full border-2 border-ios-blue text-ios-blue hover:bg-ios-blue/10 py-4 rounded-xl text-lg font-semibold card-hover"
-          data-testid="button-sign-in"
-        >
-          Sign In
-        </Button>
+        {/* Action Buttons */}
+        <div className="w-full max-w-sm space-y-4 mb-12">
+          <Button 
+            onClick={() => setLocation('/signup')}
+            className="w-full bg-gradient-to-r from-ios-blue to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white h-14 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+            data-testid="button-get-started"
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Shield className="w-5 h-5" />
+              Get Started Free
+            </div>
+          </Button>
+          
+          <Button 
+            onClick={() => setLocation('/signin')}
+            variant="outline"
+            className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 h-14 rounded-xl text-lg font-semibold transition-colors"
+            data-testid="button-sign-in"
+          >
+            Sign In
+          </Button>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mb-12">
+          <Card className="p-6 text-center border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-shadow">
+            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-7 h-7 text-ios-blue" />
+            </div>
+            <h3 className="font-bold text-lg mb-2 text-gray-800">Real-Time Tracking</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Track your child's bus in real-time with GPS precision and live updates
+            </p>
+          </Card>
+
+          <Card className="p-6 text-center border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-shadow">
+            <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Bell className="w-7 h-7 text-green-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2 text-gray-800">Instant Alerts</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Get notified about pickups, drop-offs, delays, and any safety concerns
+            </p>
+          </Card>
+
+          <Card className="p-6 text-center border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-shadow">
+            <div className="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <MessageSquare className="w-7 h-7 text-purple-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2 text-gray-800">Direct Communication</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Message directly with drivers and school administrators
+            </p>
+          </Card>
+        </div>
+
+        {/* Stats Section */}
+        <div className="w-full max-w-2xl mb-12">
+          <Card className="p-8 border-0 shadow-lg bg-gradient-to-r from-ios-blue/10 to-green-100/50">
+            <div className="grid grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl font-bold text-ios-blue mb-1">99.9%</div>
+                <div className="text-sm text-gray-600">On-Time Arrival</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-600 mb-1">24/7</div>
+                <div className="text-sm text-gray-600">Live Monitoring</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-purple-600 mb-1">100%</div>
+                <div className="text-sm text-gray-600">Parent Satisfaction</div>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* User Types */}
+        <div className="w-full max-w-4xl">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">Perfect for Everyone</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="p-4 text-center border-0 bg-white/60 hover:bg-white/80 transition-colors">
+              <Users className="w-8 h-8 text-ios-blue mx-auto mb-2" />
+              <div className="font-semibold text-sm text-gray-700">Parents</div>
+              <div className="text-xs text-gray-500 mt-1">Track & Communicate</div>
+            </Card>
+            <Card className="p-4 text-center border-0 bg-white/60 hover:bg-white/80 transition-colors">
+              <Bus className="w-8 h-8 text-green-600 mx-auto mb-2" />
+              <div className="font-semibold text-sm text-gray-700">Drivers</div>
+              <div className="text-xs text-gray-500 mt-1">Manage Routes</div>
+            </Card>
+            <Card className="p-4 text-center border-0 bg-white/60 hover:bg-white/80 transition-colors">
+              <Shield className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+              <div className="font-semibold text-sm text-gray-700">Admins</div>
+              <div className="text-xs text-gray-500 mt-1">System Control</div>
+            </Card>
+            <Card className="p-4 text-center border-0 bg-white/60 hover:bg-white/80 transition-colors">
+              <Clock className="w-8 h-8 text-orange-600 mx-auto mb-2" />
+              <div className="font-semibold text-sm text-gray-700">Managers</div>
+              <div className="text-xs text-gray-500 mt-1">Analytics & Reports</div>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

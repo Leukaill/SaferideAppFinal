@@ -113,28 +113,24 @@ export default function SignIn() {
           </p>
         </div>
 
-        {/* Demo Accounts Card */}
-        <Card className="p-4 mb-6 bg-blue-50 border-blue-200">
+        {/* Getting Started Help */}
+        <Card className="p-4 mb-6 bg-gradient-to-r from-blue-50 to-green-50 border-blue-200">
           <div className="text-center">
-            <h3 className="font-semibold text-ios-blue mb-2 flex items-center justify-center gap-2">
+            <h3 className="font-semibold text-gray-700 mb-2 flex items-center justify-center gap-2">
               <Users className="w-4 h-4" />
-              Demo Accounts
+              New to SafeRide?
             </h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between items-center px-2">
-                <span className="text-gray-600">Parent:</span>
-                <code className="bg-white px-2 py-1 rounded text-xs">jennifer.smith@email.com</code>
-              </div>
-              <div className="flex justify-between items-center px-2">
-                <span className="text-gray-600">Driver:</span>
-                <code className="bg-white px-2 py-1 rounded text-xs">mike.driver@saferide.school</code>
-              </div>
-              <div className="flex justify-between items-center px-2">
-                <span className="text-gray-600">Admin:</span>
-                <code className="bg-white px-2 py-1 rounded text-xs">admin@saferide.school</code>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">All demo passwords: <code className="bg-white px-1 rounded">demo123</code></p>
-            </div>
+            <p className="text-sm text-gray-600 mb-3">
+              Create an account to start tracking your children's safe journey to school
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setLocation('/signup')}
+              className="text-ios-blue border-ios-blue hover:bg-ios-blue/10"
+            >
+              Create Account
+            </Button>
           </div>
         </Card>
 
